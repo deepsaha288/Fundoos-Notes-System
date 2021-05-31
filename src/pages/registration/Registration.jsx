@@ -34,6 +34,10 @@ class Registration extends React.Component {
         let value = e.target.value;
         this.setState({ [name]: value })
     }
+    handleClick = (e) => {
+        this.setState({ showpassword: !this.state.showpassword })
+
+    }
     validationCheck = () => {
         this.setState({
             firstnameError: false,
@@ -95,10 +99,7 @@ class Registration extends React.Component {
         return valid;
 
     }
-    handleClick = (e) => {
-        this.setState({ showpassword: !this.state.showpassword })
-
-    }
+  
     submit = () => {
 
         if (this.validationCheck()) {
