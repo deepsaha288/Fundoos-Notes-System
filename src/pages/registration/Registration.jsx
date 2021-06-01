@@ -3,6 +3,12 @@ import './Registration.css'
 import logo from '../../assets/googleimg.svg'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import UserService from "../../service/Userservice"
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
+
+const service = new UserService();
+
 
 class Registration extends React.Component {
 
@@ -26,7 +32,7 @@ class Registration extends React.Component {
             confirmpasswordErrorMsg: "",
             showpassword: true,
             show: false,
-            snackmsg: ""
+            snackmsg: "" 
         };
     }
     handleChange = (e) => {
@@ -99,12 +105,11 @@ class Registration extends React.Component {
         return valid;
 
     }
-  
+
     submit = () => {
 
         if (this.validationCheck()) {
-            this.setState({ snackmsg: "Registered sucessfully" })
-            this.setState({ show: true })
+           
             let data = {
                 "firstName": this.state.firstname,
                 "lastName": this.state.lastname,
@@ -112,9 +117,24 @@ class Registration extends React.Component {
                 "service": "advance",
                 "password": this.state.password
             }
+            service.Registration(data).then((result) => {
+                console.log(result);
+                this.setState({ snackmsg: "Registered sucessfully" })
+                this.setState({ show: true })
+            }).catch((error) => {
+                console.log(error);
+            })
+           
         }
-    }
+    
 
+        else {
+            this.setState({ snackmsg: "Please enter valid input" })
+            this.setState({ show: true })
+        }
+
+    }
+  
     render() {
         return (
             <div className="body">
@@ -151,6 +171,7 @@ class Registration extends React.Component {
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
                                 <div className="inline__buttons">
+                                 <Link to="/Login">Sign in instead</Link>
                                 < Button variant="outlined" size="small" onClick={this.submit} >Next</Button>
                                 </div>
                             </div>
@@ -158,6 +179,7 @@ class Registration extends React.Component {
                         <div className="logo">
                             <img src={logo} alt="" />
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -165,4 +187,4 @@ class Registration extends React.Component {
         )
     }
 }
-export default Registration;
+export default Registration; 
