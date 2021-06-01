@@ -8,7 +8,7 @@ class UserService{
         return axioService.postMethod(`${baseUrl}user/userSignup`,data)
     }
     login = (data) => {
-        return axioService.postMethod(`${this.baseUrl}user/login`, data);
+        return axioService.postMethod(`${baseUrl}user/login`, data);
     }
 }
 export default UserService;
