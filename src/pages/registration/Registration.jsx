@@ -4,8 +4,7 @@ import logo from '../../assets/googleimg.svg'
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import UserService from "../../service/Userservice"
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
-
+import { BrowserRouter as Router, Route, Link, Switch,Redirect } from 'react-router-dom';
 
 const service = new UserService();
 
@@ -32,7 +31,7 @@ class Registration extends React.Component {
             confirmpasswordErrorMsg: "",
             showpassword: true,
             show: false,
-            snackmsg: "" 
+            snackmsg: ""
         };
     }
     handleChange = (e) => {
@@ -44,6 +43,12 @@ class Registration extends React.Component {
         this.setState({ showpassword: !this.state.showpassword })
 
     }
+    handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        this.setState({ show: false })
+    };
     validationCheck = () => {
         this.setState({
             firstnameError: false,
@@ -59,15 +64,12 @@ class Registration extends React.Component {
         })
         var valid = true;
         if (this.state.firstname.length == 0) {
-            this.setState({ firstnameError: true })
-            this.setState({ firstnameErrorMsg: "Enter first name " })
+            this.setState({ firstnameError: true,  firstnameErrorMsg: "Enter first name " })
             valid = false;
         }
 
         if (this.state.firstname.length == 0 && this.state.lastname.length == 0) {
-            this.setState({ firstnameError: true })
-            this.setState({ lastnameError: true })
-            this.setState({ firstnameErrorMsg: "Enter first name, lastname" })
+            this.setState({ firstnameError: true, lastnameError: true,firstnameErrorMsg: "Enter first name, lastname" })
             valid = false;
         }
 
@@ -75,30 +77,25 @@ class Registration extends React.Component {
         let patter = "^[0-9a-zA-Z]+([.\\-_+][0-9a-zA-Z]+)*@[a-z0-9A-Z]+.[a-z]{2,4}([.][a-zA-Z]{2,})*$";
         let pattern = new RegExp(patter);
         if (!pattern.test(this.state.username)) {
-            this.setState({ usernameError: true })
-            this.setState({ usernameErrorMsg: "Invalid Gmail address" })
+            this.setState({ usernameError: true,usernameErrorMsg: "Invalid Gmail address"  })
             valid = false;
         }
         if (this.state.username.length == 0) {
-            this.setState({ usernameError: true })
-            this.setState({ usernameErrorMsg: "Choose Gmail address" })
+            this.setState({ usernameError: true,usernameErrorMsg: "Choose Gmail address" })
             valid = false;
         }
 
         if (this.state.password.length != 0 && this.state.password != this.state.confirmpassword) {
-            this.setState({ passwordError: true })
-            this.setState({ passwordErrorMsg: "password didn't match " })
+            this.setState({ passwordError: true,passwordErrorMsg: "password didn't match "  })
             valid = false;
         }
         if (this.state.password.length < 8) {
-            this.setState({ passwordError: true })
-            this.setState({ passwordErrorMsg: "password should be atleast 8 characters" })
+            this.setState({ passwordError: true,passwordErrorMsg: "password should be atleast 8 characters"})
             valid = false;
         }
 
         if (this.state.password.length == 0) {
-            this.setState({ passwordError: true })
-            this.setState({ passwordErrorMsg: "Enter a password" })
+            this.setState({ passwordError: true,passwordErrorMsg: "Enter a password"})
             valid = false;
         }
 
@@ -109,7 +106,7 @@ class Registration extends React.Component {
     submit = () => {
 
         if (this.validationCheck()) {
-           
+
             let data = {
                 "firstName": this.state.firstname,
                 "lastName": this.state.lastname,
@@ -119,23 +116,28 @@ class Registration extends React.Component {
             }
             service.Registration(data).then((result) => {
                 console.log(result);
-                this.setState({ snackmsg: "Registered sucessfully" })
-                this.setState({ show: true })
+                this.setState({ snackmsg: "Registered sucessfully",show: true }) 
+                this.signinpage(); 
             }).catch((error) => {
                 console.log(error);
             })
-           
-        }
-    
 
+        }
+        
         else {
-            this.setState({ snackmsg: "Please enter valid input" })
-            this.setState({ show: true })
+            this.setState({ snackmsg: "Please enter valid input" ,show: true  })
         }
 
     }
-  
+    signinpage = () => {
+        this.setState({ redirect: "/Login"});
+      }
+
     render() {
+        if (this.state.redirect)
+        {
+            return <Redirect to={this.state.redirect} />
+        }
         return (
             <div className="body">
                 <div className="accountbox">
@@ -171,20 +173,21 @@ class Registration extends React.Component {
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
                                 <div className="inline__buttons">
-                                 <Link to="/Login">Sign in instead</Link>
-                                < Button variant="outlined" size="small" onClick={this.submit} >Next</Button>
+                                    <Link to="/Login">Sign in instead</Link>
+                                    < Button variant="outlined" size="small" onClick={this.submit}>Next</Button>
                                 </div>
                             </div>
                         </div>
                         <div className="logo">
                             <img src={logo} alt="" />
+                            <span>One account. All of Fundoo</span>
+                            <snap>working for you.</snap> 
                         </div>
-                        
-                    </div>
+                    </div>  
                 </div>
             </div>
 
         )
     }
 }
-export default Registration; 
+export default Registration;

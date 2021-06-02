@@ -10,5 +10,16 @@ class UserService{
     login = (data) => {
         return axioService.postMethod(`${baseUrl}user/login`, data);
     }
+    forgetpassword =(data)=>{
+        return axioService.postMethod(`${baseUrl}user/reset`,data)
+    }
+    resetpassword =(data,token)=>{
+        console.log(token);
+        console.log(data);
+        return axioService.postMethod(`${baseUrl}user/reset-password`,data,{
+            headers:{
+                'Authorization':token,
+            }})
+    }
 }
 export default UserService;

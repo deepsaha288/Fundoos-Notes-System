@@ -24,7 +24,7 @@ class Login extends React.Component {
         }
 
     }
-  
+
     handlechange = (e) => {
         let name = e.target.name;
         let value = e.target.value;
@@ -42,25 +42,21 @@ class Login extends React.Component {
         let patter = "^[0-9a-zA-Z]+([.\\-_+][0-9a-zA-Z]+)*@[a-z0-9A-Z]+.[a-z]{2,4}([.][a-zA-Z]{2,})*$";
         let pattern = new RegExp(patter);
         if (!pattern.test(this.state.username)) {
-            this.setState({ usernameError: true })
-            this.setState({ usernameErrorMsg: "Invalid Gmail address" })
+            this.setState({ usernameError: true,usernameErrorMsg: "Invalid Gmail address" })
             valid = false;
         }
         if (this.state.username.length == 0) {
-            this.setState({ usernameError: true })
-            this.setState({ usernameErrorMsg: "Choose Gmail address" })
+            this.setState({ usernameError: true,usernameErrorMsg: "Choose Gmail address" })
             valid = false;
         }
 
         if (this.state.password.length < 8) {
-            this.setState({ passwordError: true })
-            this.setState({ passwordErrorMsg: "password should be atleast 8 characters" })
+            this.setState({ passwordError: true,passwordErrorMsg: "password should be atleast 8 characters"  })
             valid = false;
         }
 
         if (this.state.password.length == 0) {
-            this.setState({ passwordError: true })
-            this.setState({ passwordErrorMsg: "Enter a password" })
+            this.setState({ passwordError: true, passwordErrorMsg: "Enter a password"})
             valid = false;
         }
 
@@ -77,26 +73,23 @@ class Login extends React.Component {
             let data = {
                 "email": this.state.username,
                 "password": this.state.password,
-                "server": "advance"
+            
             }
             service.login(data).then((result) => {
                 localStorage.setItem('Token', result.data.id);
                 localStorage.setItem('FirstName', result.data.firstName);
                 localStorage.setItem('LastName', result.data.lastName);
                 localStorage.setItem('Email', result.data.email);
-
                 localStorage.setItem('userDetails', JSON.stringify(result.data))
                 console.log(result.data.id)
-                this.setState({ snackmsg: "Login sucess" })
-                this.setState({ show: true })
+                this.setState({ snackmsg: "Login sucess",show: true })
 
             }).catch((error) => {
                 console.log(error);
             })
         }
         else {
-            this.setState({ snackmsg: "Please Enter Valid details" })
-            this.setState({ show: true })
+            this.setState({ snackmsg: "Please Enter Valid details",show: true  })
         }
     }
     render() {
@@ -122,14 +115,12 @@ class Login extends React.Component {
                                     <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
-                                <div className="forget"> <a href="#"><Link to="#">Forget-Password</Link></a></div>
+                                <div className="forget"><Link to="/ForgetPassword">Forget-Password</Link></div>
                             </div>
                         </div>
-
                         <div className="inline__button">
                             <Link to="/">Create Account</Link>
                             < Button variant="outlined" size="small" onClick={this.submit}>Sign in</Button>
-
                         </div>
                     </div>
                 </div>
