@@ -30,7 +30,8 @@ export default class getNote extends React.Component {
         return (
             <div>            
                 <CreateNote updateData={this.getNote} /> 
-           
+                <DisplayNote updateNote={this.props.updateNote} 
+                          NotesArray={this.state.notes} /> 
             </div>
         )
     }
