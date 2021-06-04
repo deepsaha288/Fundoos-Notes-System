@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route, Link, Navlink, Switch } from 'react-rou
 
 const service = new UserService();
 
-export default class ForgetPassword extends React.Component {
+class ForgetPassword extends React.Component {
     constructor(probs) {
         super(probs);
         this.state = {
@@ -54,10 +54,10 @@ export default class ForgetPassword extends React.Component {
                     <div className="inline___button">
                        <Link to="/">Try another way</Link>  
                         < Button variant="outlined" size="small" onClick={this.submit}>submit</Button>
-                      
                     </div>
                 </div>
             </div>
      </>
      ) }
 }
+export default ForgetPassword;

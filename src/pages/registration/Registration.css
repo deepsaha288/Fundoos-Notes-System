@@ -52,12 +52,15 @@
   }
   
   .logo{
-    width: 320px;
-    height: 550px;
+    width: 350px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+
   }
   .inline__buttons{
     display: flex;
@@ -75,7 +78,7 @@
     background-color: blue;
   }
   .logo img{
-    width: 200px;
+    width: 220px;
   }
   .google {
       display: flex;
@@ -118,6 +121,10 @@
       }
       .accountbox{
         height: 100vh;
+        border: none;
+        margin: 0%;
+        padding: 0%;
+        width: 0;
       }  
     }
   
@@ -139,6 +146,7 @@
   
   .inline{
     flex-direction: column;
+    padding-top: 8px;
   }
   .fn{
     width: 100%;
@@ -169,4 +177,9 @@
         font-size: 19px;
       }
       
+  .inline{
+    flex-direction: column;
+    padding-top: 8px;
   }
+
+}
