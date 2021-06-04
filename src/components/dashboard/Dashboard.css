@@ -1,0 +1,305 @@
+.notes{
+    width: 100%;
+    min-height: 90vh;
+    height: auto;
+    margin-top: 50px;
+    background-color: #fff;
+}
+.inline1{
+    display: flex;
+    flex-direction: row;
+    line-height: 1;
+}
+.inline1 h4{
+    opacity: 1;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    font-size: small;
+}
+.notebox p {
+    display: flex;
+    opacity: 1;
+    font-family: 'Google Sans',Roboto,Arial,sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0;
+
+}
+.inline1 > img{
+    height: 20px;
+    margin-top: 6px;
+}
+.dialogbox{
+    width: 590px;
+    height:auto;
+    padding: 15px 8px;
+}
+.inputbas{
+    margin: 8px 0;
+}
+.colorbox{
+    width: 150px;
+    height: 130px;
+    box-shadow: 0 5px 5px rgba(92,99,105,.2);
+    position: absolute;
+    left: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px;
+    z-index: 1300;
+    background:white;
+    
+}
+.colorsmall{
+    margin: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background-color: red;
+}
+.edit{
+    font-size: 30px;
+    font-weight: bolder;
+}
+.profile{
+    width: 250px;
+    height: auto;
+    position: absolute;
+    right: 67px;
+    text-align: center;
+    padding: 10px;
+    text-transform: capitalize;
+    box-shadow: 0 10px 25px rgba(92,99,105,.2);
+    background-color: white;
+    z-index: 1;
+
+}
+.box{
+    width:300px;
+    height:300px;
+    background-color: violet;
+    left: 71%;
+    top: 0px;
+    display: none;
+}
+.notess{
+    margin-top: 4vh;
+    height: auto;
+    display: flex;
+    max-width: 100%;
+    flex-direction: row;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+}
+.notebox{
+    width: 240px;
+    max-width: 240px;
+    height: fit-content;
+    border-radius: 8px;
+    border:1px solid #dadce0;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    padding-left: 8px;
+    box-sizing: border-box;
+}
+.notebox img{
+    opacity: 0;
+}
+.notebox .inlineicons{
+      opacity: 0;
+      display: flex;
+      width: 230px;
+      padding-top: 8px;
+      position: relative;
+      padding-bottom:8px ;
+}
+.inlineicons > .colorbox{
+    position: absolute;
+    background-color:white;
+    opacity: 1;
+    left: -50px;
+    top:-120px;
+    z-index: 1201;
+}
+.notebox:hover .inlineicons{
+       opacity: 1;
+}
+.notebox:hover img{
+    opacity: 0.7;
+}
+
+.hide{
+    opacity:1;
+}
+
+
+.appear{
+    position: absolute;
+    top:160px;
+    opacity:0.7;
+    font-size: 22px;
+    color: #80868b;
+}
+
+.takenote{
+    width: 500px;
+    height: auto;
+    border-radius: 8px;
+    border:1px solid #dadce0;
+    box-shadow: 0 10px 10px rgba(92,99,105,.2);
+    margin-left: 350px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    opacity: 0.7;
+}
+.takenote input{
+    height: 40px;
+    width: 400px;
+    border:none;
+    margin-left: 10px;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 15px;
+    outline: none;
+}
+.brieftakenote{
+    width: 500px;
+    height: 100px;
+    border-radius: 8px;
+    border:1px solid #dadce0;
+    box-shadow: 0 10px 25px rgba(92,99,105,.2);
+    margin-left: 300px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.inputbase{
+    width: 50px;
+}
+.search{
+    width:700px ;
+    height: 50px;
+   margin-left: 40px;
+   border: 1px solid transparent;
+   background: #f1f3f4;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   border-radius: 8px;
+}
+.search input{
+    width: 500px;
+    height: 40px;
+    background: #f1f3f4;
+    border: none;
+    font-size: 20px;
+    text-transform: capitalize;
+    outline: none;
+}
+.icons{
+    margin-left: 100px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.7;
+}
+@media only screen and (max-width: 600px) {
+.notes{
+    width: 100%;
+    min-height: 10vh;
+    height: auto;
+    margin-top: 64px;
+    background-color: #fff;
+    position: relative;
+}
+.takenote{
+   width: 90%;
+   height: auto;
+   border-radius: 8px;
+   border:1px solid #dadce0;
+   box-shadow: 0 10px 10px rgba(92,99,105,.2);
+   margin-left: 20px;
+   margin-top: 30px;
+   display: flex;
+   justify-content: space-around;
+   align-items: center;
+   opacity: 0.7;
+}
+.takenote input{
+   height: 40px;
+   width: 400px;
+   border:none;
+   margin-left: 10px;
+   font-family: 'Roboto',arial,sans-serif;
+   font-size: 15px;
+   outline: none;
+}
+.brieftakenote{
+   width: 90%;
+   height: 140px;
+   border-radius: 8px;
+   border:1px solid #dadce0;
+   box-shadow: 0 10px 25px rgba(92,99,105,.2);
+   margin-left: 0px;
+   margin-top: 30px;
+   display: flex;
+   flex-direction: column;
+   justify-content:center;
+   padding: 10;
+   margin-left: 20px;
+}
+
+.search{
+    width:500px ;
+    height: 50px;
+   margin-left: 10px;
+   border: 1px solid transparent;
+   background: #f1f3f4;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   border-radius: 8px;
+}
+.search input{
+    width: 200px;
+    height: 40px;
+    background: #f1f3f4;
+    border: none;
+    font-size: 20px;
+    text-transform: capitalize;
+    outline: none;
+}
+
+.icons{
+    margin-left: 10px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
+    opacity: 0.7;
+}
+.profile{
+    width: 250px;
+    height: auto;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    padding: 10px;
+    text-transform: capitalize;
+    box-shadow: 0 10px 25px rgba(92,99,105,.2);
+  
+
+}
+.dialogbox{
+    width: auto;
+    height:auto;
+    padding: 15px 8px;
+}
+}
