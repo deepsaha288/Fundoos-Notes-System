@@ -8,7 +8,18 @@ class UserService{
         return axioService.postMethod(`${baseUrl}user/userSignup`,data)
     }
     login = (data) => {
-        return axioService.postMethod(`${this.baseUrl}user/login`, data);
+        return axioService.postMethod(`${baseUrl}user/login`, data);
+    }
+    forgetpassword =(data)=>{
+        return axioService.postMethod(`${baseUrl}user/reset`,data)
+    }
+    resetpassword =(data,token)=>{
+        console.log(token);
+        console.log(data);
+        return axioService.postMethod(`${baseUrl}user/reset-password`,data,{
+            headers:{
+                'Authorization':token,
+            }})
     }
 }
 export default UserService;

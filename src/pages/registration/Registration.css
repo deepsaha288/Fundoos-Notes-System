@@ -57,6 +57,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
   }
   .inline__buttons{
     display: flex;
@@ -74,7 +75,7 @@
     background-color: blue;
   }
   .logo img{
-    width: 250px;
+    width: 200px;
   }
   .google {
       display: flex;
