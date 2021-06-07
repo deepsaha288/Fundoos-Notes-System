@@ -29,11 +29,13 @@ import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
-
+import CreateNote from '../CreateNotes/CreateNote'
+import GetNote from '../GetNote/GetNote';
+import ArchiveNotes from '../../pages/ArchiveNotes/Archive'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+    root: { 
         display: 'flex',
     },
     emoji: {
@@ -143,9 +145,9 @@ function MiniDrawer(props) {
             case 'Trash':
                 break;
             case 'Notes':
-              
                 break;
             case 'Archive':
+                props.history.push('/dashboard/archiveNotes');
                 break;
             default:
                 break;
@@ -221,6 +223,23 @@ function MiniDrawer(props) {
                     ))}
                 </List>
             </Drawer>
+            <div className="notes">
+                {profile ? <div className="profile">
+                    <h2>{localStorage.getItem('FirstName')}  {localStorage.getItem('LastName')} </h2>
+                    <p>{localStorage.getItem('Email')}</p>
+                    <input type="button" value="Sign Out" />
+                </div> : null}
+
+               
+                <Router>
+                    <Switch>
+                        <Route exact path="/Dashboard" component={GetNote} ></Route>
+                        <Route exact path="/Dashboard" component={CreateNote}></Route>
+                        <Route path="/dashboard/archiveNotes" component={ArchiveNotes} ></Route>
+                    </Switch>
+                </Router>
+            </div>
+          
           </div>
     );
 }

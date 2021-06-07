@@ -3,7 +3,7 @@ import '../login/Login.css'
 import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core'
 import UserService from "../../service/Userservice";
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch,Redirect } from 'react-router-dom';
 
 const service = new UserService();
 
@@ -83,6 +83,7 @@ class Login extends React.Component {
                 localStorage.setItem('userDetails', JSON.stringify(result.data))
                 console.log(result.data.id)
                 this.setState({ snackmsg: "Login sucess",show: true })
+                this.dashboard();
 
             }).catch((error) => {
                 console.log(error);
@@ -92,7 +93,14 @@ class Login extends React.Component {
             this.setState({ snackmsg: "Please Enter Valid details",show: true  })
         }
     }
+    dashboard = () => {
+        this.setState({ redirect: "/Dashboard"});
+      }
     render() {
+        if (this.state.redirect)
+        {
+            return <Redirect to={this.state.redirect} />
+        }
         return (
             <>
                 <div className="fullbody">
@@ -115,7 +123,7 @@ class Login extends React.Component {
                                     <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
-                                <div className="forget"><Link to="/ForgetPassword">Forget-Password</Link></div>
+                                <div className="forget"><a href=""><Link to ="/ForgetPassword">forgetpassword</Link></a></div>
                             </div>
                         </div>
                         <div className="inline__button">

@@ -1,4 +1,3 @@
-
 import './App.css';
 import Registration from './pages/registration/Registration';
 import Login from './pages/login/Login';
@@ -17,7 +16,7 @@ function App() {
       <Switch>
        <Route  exact path="/" component={Registration} ></Route>
         <Route path="/Login" component={Login} ></Route>
-        <Route path="/forgetpassword" component={ForgetPassword}></Route>
+        <Route path="/ForgetPassword" component={ForgetPassword}></Route>
         <Route path="/ResetPassword:/token" component={ResetPassword}></Route>
          <Route path="/Dashboard" component={Dashboard}></Route>
        </Switch>
