@@ -24,8 +24,9 @@
             font-family: roboto,'Noto Sans Myanmar UI',arial,sans-serif;
             font-size: 16px;
         }
-.google{
+.googleName{
     font-size: 24px;
+    padding-bottom: 10px;
 } 
 #f {
     color: blue;
@@ -75,7 +76,8 @@
 
 .forget{
     display: flex;
-    margin-top: 15px;
+    margin-top: 10px;
+    padding-left: 10px;
 }
 .forget a{
     text-decoration: none;

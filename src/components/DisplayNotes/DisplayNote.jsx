@@ -43,6 +43,7 @@ export default class DisplayNotes extends React.Component {
                  this.handleClose() 
                 console.log(result);
                 getnotes();
+                this.filterData();
             }).catch((err) => {
                 console.log(err);
             })
@@ -74,15 +75,14 @@ export default class DisplayNotes extends React.Component {
         console.log(this.state.open);
         console.log(getnotes) 
         getnotes();
+       
     };
 
     render() {
-      
-
         return (
             <>
                 <div className="notess">
-                    {this.props.NotesArray.filter((data) => data.isDeleted === false  && data.isArchived === false).reverse().map((value, index) => {
+                    {this.props.NotesArray.reverse().map((value, index) => {
                         var style={backgroundColor:value.color}
                         return (<div className="notebox" style={style}>
                             <div onClick={(e) => this.handleClickOpen(e, value)}>

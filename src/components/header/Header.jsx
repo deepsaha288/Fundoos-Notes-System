@@ -28,18 +28,22 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
 import ArchiveOutlinedIcon from '@material-ui/icons/ArchiveOutlined';
 import DeleteOutlinedIcon from '@material-ui/icons/DeleteOutlined';
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom';
+import {Route, Switch, withRouter } from 'react-router-dom';
 import GetNote from '../GetNote/GetNote';
 import TrashNotes from '../../pages/TrashNotes/Trash'
 import ArchiveNotes from '../../pages/ArchiveNotes/Archive'
+import { Button } from '@material-ui/core'
+import Userservice from '../../service/Userservice'
 const drawerWidth = 240;
+
+const service=  new Userservice;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
     emoji: {
-        fontSize: "200px",
+        fontSize: "150px",
         display: "flex",
         justifyContent: "center",
     },
@@ -53,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     menuButton: {
-        marginRight: 36,
+        marginRight: 30,
         opacity: '0.7',
     },
     hide: {
@@ -68,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
     drawerOpen: {
         width: drawerWidth,
         border: 'none',
-        paddingLeft: '7px',
+        paddingLeft: '5px',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -76,14 +80,14 @@ const useStyles = makeStyles((theme) => ({
         }),
     },
     drawerClose: {
-        paddingLeft: '7px',
+        paddingLeft: '5px',
         border: 'none',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
         overflowX: 'hidden',
-        width: theme.spacing(7) + 1,
+        width: theme.spacing(10) + 1,
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing(9) + 1,
         },
@@ -98,7 +102,7 @@ const useStyles = makeStyles((theme) => ({
     },
     content: {
         flexGrow: 1,
-        padding: theme.spacing(3),
+        padding: theme.spacing(1),
     },
 }));
 function icon(index) {
@@ -138,6 +142,7 @@ function MiniDrawer(props) {
 
     const handleProfile = () => {
         setProfile(!profile)
+
     }
     function changeContent(e, text) {
         e.stopPropagation();
@@ -146,7 +151,7 @@ function MiniDrawer(props) {
                 props.history.push('/Dashboard/trashNotes');
                 break;
             case 'Notes':
-                // props.history.push('/Dashboard/GetNotes');
+                 props.history.push('/Dashboard');
                 break;
             case 'Archive':
                 props.history.push('/Dashboard/archiveNotes');
@@ -156,7 +161,14 @@ function MiniDrawer(props) {
         }
 
     }
-
+    const signout =()=>{
+        let token = localStorage.getItem("Token");
+        service.logout(token).then((result) => {
+            console.log(result)
+        }).catch((error) => {
+            console.log(error);
+        })
+    }
     return (
         <div className={classes.root}>
             <CssBaseline />
@@ -229,26 +241,15 @@ function MiniDrawer(props) {
                 {profile ? <div className="profile">
                     <h2>{localStorage.getItem('FirstName')}  {localStorage.getItem('LastName')} </h2>
                     <p>{localStorage.getItem('Email')}</p>
-                    <input type="button" value="Sign Out" />
+                    {/* <input type="button" value="Sign Out" /> */}
+                    < Button variant="outlined" size="small" onClick={signout}>Sign Out</Button>
                 </div> : null}
-                <Router>
+                
                     <Switch>
-                        {/* <Route exact path="/Dashboard" component={GetNote} ></Route>
+                        <Route exact path="/Dashboard" component={GetNote} ></Route>
                         <Route path="/Dashboard/trashNotes" component={TrashNotes} ></Route>
-                        <Route path="/Dashboard/archiveNotes" component={ArchiveNotes} ></Route> */}
-                        <Route
-
-                            path="/Dashboard"
-                            render={({ match: { url } }) => (
-                                <>
-                                    <Route path={`${url}/`} component={GetNote} exact />
-                                    <Route path={`${url}/trashNotes`} component={TrashNotes} />
-                                    <Route path={`${url}/archiveNotes`} component={ArchiveNotes} />
-                                </>
-                            )}
-                        />
+                        <Route path="/Dashboard/archiveNotes" component={ArchiveNotes} ></Route>
                     </Switch>
-                </Router>
             </div>
 
         </div>
