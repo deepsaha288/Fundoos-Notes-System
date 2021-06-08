@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core'
 import UserService from "../../service/Userservice";
 import Snackbar from '@material-ui/core/Snackbar';
-import {BrowserRouter as Router, Link,Redirect } from 'react-router-dom';
+import {BrowserRouter as Route, Link,Redirect } from 'react-router-dom';
 
 const service = new UserService();
 
@@ -124,7 +124,7 @@ class Login extends React.Component {
                                     <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
-                                <div className="forget"><a href=""><Link to ="/ForgetPassword">forgetpassword</Link></a></div>
+                                <div className="forget"><Link to ="/ForgetPassword">ForgetPassword</Link></div>
                             </div>
                         </div>
                         <div className="inline__button">

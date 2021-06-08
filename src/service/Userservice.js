@@ -20,6 +20,17 @@ class UserService{
                 'Authorization':token,
             }})
     }
+
+    logout = (token) => {
+        console.log(token)
+        return axioService.postMethod(`${baseUrl}/user/logout`,
+        {
+            headers: {
+                'Authorization': token,
+            }
+        })
+    }
+
     addNote = (data, token) => {
         console.log(token);
         return axioService.postMethod(`${baseUrl}notes/addNotes`, data, {
@@ -50,7 +61,6 @@ class UserService{
             }
         })
     }
-
     archieveNote = (data,token) => {
         return axioService.postMethod(`${baseUrl}notes/archiveNotes`, data,{
             headers:{
@@ -65,6 +75,21 @@ class UserService{
             }
         })
     }
+    trashNote = (token) => {
+        return axioService.getMethod(`${baseUrl}notes/getTrashNotesList`,{
+            headers:{
+                'Authorization':token,
+            }
+        })
+    }
+    getArchiveNote = (token) => {
+        return axioService.getMethod(`${baseUrl}notes/getArchiveNotesList`,{
+            headers:{
+                'Authorization':token,
+            }
+        })
+    }
+
 }
 
 export default UserService;
