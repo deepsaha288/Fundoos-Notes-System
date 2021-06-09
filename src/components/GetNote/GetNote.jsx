@@ -21,20 +21,27 @@ export default class getNote extends React.Component {
         let token = localStorage.getItem('Token');
         console.log('called');
         service.getNote(token).then((res)=>{
-        this.setState({notes:res.data.data.data})
         console.log(this.state.notes);
+        this.filterData(res.data.data.data);
         })
     }
     
+    filterData = (data) => {
+        let adults = data.filter(note => {
+             if ((note.isArchived!==true) && (note.isDeleted!==true)) return note
+            } );
+        this.setState({
+            notes: adults
+        })
+    }
     
     render(){
         return (
             <div> 
                 <UserProvider  value={this.getNote}>           
                 <CreateNote /> 
-                <DisplayNote
-                          NotesArray={this.state.notes} /> 
-                          </UserProvider >
+                <DisplayNote NotesArray={this.state.notes} /> 
+                </UserProvider >
             </div>
         )
     }

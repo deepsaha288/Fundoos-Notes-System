@@ -14,6 +14,7 @@ export default class Notes extends React.Component {
     static contextType = ContextGetNote
     constructor(props) {
         super(props)
+        console.log("inisde create nte")
 
         this.state = {
             open: true,

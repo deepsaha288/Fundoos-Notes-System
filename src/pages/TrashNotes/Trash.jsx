@@ -1,11 +1,9 @@
 import React from "react";
-import GetNote from '../../components/GetNote/GetNote';
-import Icons from '../../components/Icons/Icon'
-import InputBase from '@material-ui/core/InputBase';
 import Userservice from '../../service/Userservice'
+import DisplayNote from '../../components/DisplayNotes/DisplayNote'
+import {UserProvider} from '../../components/context/Context'
 
 const service = new Userservice();
-const getNote = new GetNote();
 
 export default class TrashNotes extends React.Component {
     constructor(props){
@@ -15,12 +13,12 @@ export default class TrashNotes extends React.Component {
         })
     }
     componentDidMount(){
-        this.note();
+        this.getNote();
     }
-    note =()=>{
+    getNote =()=>{
         let token = localStorage.getItem('Token');
         console.log('Trash');
-        service.getNote(token).then((res)=>{
+        service.trashNote(token).then((res)=>{
             console.log(res);
             this.setState({notes:res.data.data.data})
              console.log(this.state.notes);
@@ -31,31 +29,10 @@ export default class TrashNotes extends React.Component {
     render(){
         return(
             <>
-            <div className="notess">
-                    {
-                       this.state.notes.filter( data => data.isDeleted === true).map((value, index) => {
-                        return (<div className="notebox " key={index} >
-
-                            <InputBase
-                                style={{ paddingLeft: '8px' }}
-                                defaultValue={value.title}
-                                multiline
-                                className=""
-                                placeholder="  Description"
-                                inputProps={{ 'aria-label': 'Description ' }}
-                            />
-                            <InputBase
-                                style={{ paddingLeft: '8px' }}
-                                defaultValue={value.description}
-                                multiline
-                                className=""
-                                placeholder="  Description"
-                                inputProps={{ 'aria-label': 'Description ' }}
-                            />
-                            <Icons Notes={value} />
-                        </div>)
-                    })}
-                </div>
+            <UserProvider  value={this.getNote}>           
+                <DisplayNote
+                          NotesArray={this.state.notes} /> 
+                          </UserProvider >
             </>
         )
     }
