@@ -22,3 +22,9 @@
        background: none;
        border: none;
 }
+.MuiInputBase-inputMultiline{
+    font-size: 13px !important;
+}
+.MuiInputBase-input{
+    font-size: 13px !important;
+}

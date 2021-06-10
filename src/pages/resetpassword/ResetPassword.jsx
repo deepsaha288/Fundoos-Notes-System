@@ -61,6 +61,7 @@ export default  function ResetPassword () {
                     <div className="inline__button">
                         <Link to="/login">Back</Link>
                         < Button variant="outlined" size="small" onClick={submit}>submit</Button>
+                        
                     </div>
                 </div>
             </div>

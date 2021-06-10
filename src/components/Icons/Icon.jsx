@@ -11,7 +11,6 @@ import MenuItem from '@material-ui/core/MenuItem';
 import UserService from '../../service/Userservice'
 import ContextGetNote from '../context/Context'
 
-
 const service = new UserService();
 
 export default class Icon extends React.Component {
@@ -33,6 +32,7 @@ export default class Icon extends React.Component {
       noteIdList: [value.id],
       isArchived: true,
     };
+
     let token = localStorage.getItem("Token");
     service.archieveNote(data, token)
       .then((data) => {
@@ -55,6 +55,20 @@ export default class Icon extends React.Component {
   changeShow = () => {
     this.setState({ show: !this.state.show })
   }
+  getPhoto=(e,value)=>{
+    console.log(e.target.file)
+    let token = localStorage.getItem("Token");
+    let data = {
+      noteIdList: [value.id],
+      file:e.target.files
+    }
+    console.log(data)
+    service.updateNote(data, token).then((result) => {
+      console.log(result);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   deleteNote = (e, value) => {
     const getnotes = this.context
@@ -74,7 +88,9 @@ export default class Icon extends React.Component {
       console.log(err);
     })
   }
-  updateNote = (e, colorValue, value) => {
+  colorItem= (e, colorValue, value) => {
+    debugger;
+    if(this.props.val !== "imgVal"){
     const getnotes = this.context
     let token = localStorage.getItem("Token");
     let data = {
@@ -87,9 +103,16 @@ export default class Icon extends React.Component {
       console.log(result);
       console.log(getnotes)
        getnotes();
+       this. handleClose();
+          this.setColor();
     }).catch((err) => {
       console.log(err);
     })
+  }
+  else{
+    this.props.handleColor(colorValue);
+
+  }
   }
   sendColor = (e, value) => {
     console.log("send color");
@@ -97,24 +120,26 @@ export default class Icon extends React.Component {
   }
 
   render() {
-    const colors = [' #d7aefb', '#a7ffeb', '#e8eaed',
-      '#aecbfa', '#e6c9a8', '#fdcfe8', '#f28b82', '#aecbfa'];
+    const colors = ['#ffffff','#f28b82','#fbbc04','#fff475','#ccff90','#cbf0f8', '#a7ffeb','#aecbfa','#d7aefb','#fdcfe8','#e6c9a8','#e8eaed'];
     return (
       <>
         <div className="inlineicons">
           <AddAlertOutlinedIcon />
           < PersonAddOutlinedIcon />
+          <div>
           <ColorLensOutlinedIcon onClick={this.changeShow} />
-          <AddPhotoAlternateOutlinedIcon />
-          < ArchiveOutlinedIcon onClick={() => this.archieveNote(this.props.Notes)} ></ ArchiveOutlinedIcon>
-          <MoreVertOutlinedIcon onClick={(e) => this.handleClick(e)} />
           {this.state.show ? <div className="colorbox" >
             {colors.map((value) => {
-              return (<><div className="colorsmall" onClick={(e) => this.updateNote(e, value, this.props.Notes)} style={{ backgroundColor: value }}></div></>)
+              return (<><div className="colorsmall" onClick={(e) => this.colorItem(e, value, this.props.Notes)} style={{ backgroundColor: value }}></div></>)
             })}
 
           </div> : null}
-
+          </div>
+          <input type="file" ref={this.myfile} onChange={(e) => this.getPhoto(e,this.props.Notes)}/>
+          <AddPhotoAlternateOutlinedIcon onclick={(e)=>this.photoUpdate()}></AddPhotoAlternateOutlinedIcon>
+          < ArchiveOutlinedIcon onClick={() => this.archieveNote(this.props.Notes)} ></ ArchiveOutlinedIcon>
+          <MoreVertOutlinedIcon onClick={(e) => this.handleClick(e)} />
+  
           <Menu
                id="simple-menu"
               anchorEl={this.state.anchorEl}

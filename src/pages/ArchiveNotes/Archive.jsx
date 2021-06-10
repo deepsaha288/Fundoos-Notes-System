@@ -25,6 +25,7 @@ export default class ArchiveNotes extends React.Component {
             console.log(res);
             this.setState({notes:res.data.data.data})
             console.log(this.state.notes);
+            this.setColor();
         }).catch((err)=>{
              console.log(err);
         })

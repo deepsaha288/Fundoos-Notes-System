@@ -34,9 +34,10 @@ import TrashNotes from '../../pages/TrashNotes/Trash'
 import ArchiveNotes from '../../pages/ArchiveNotes/Archive'
 import { Button } from '@material-ui/core'
 import Userservice from '../../service/Userservice'
+//  import {ProtectedRoute} from '../../ProtectedRoute';
 const drawerWidth = 240;
 
-const service=  new Userservice;
+const service=  new Userservice();
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -71,6 +72,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerOpen: {
         width: drawerWidth,
+        
         border: 'none',
         paddingLeft: '5px',
         transition: theme.transitions.create('width', {
@@ -82,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
     drawerClose: {
         paddingLeft: '5px',
         border: 'none',
+        width:"70px",
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -161,7 +164,7 @@ function MiniDrawer(props) {
         }
 
     }
-    const signout =()=>{
+    const signout =(e)=>{
         let token = localStorage.getItem("Token");
         service.logout(token).then((result) => {
             console.log(result)

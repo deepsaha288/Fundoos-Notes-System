@@ -20,6 +20,7 @@ export default class Notes extends React.Component {
             open: true,
             title: "",
             description: "",
+            color:"#ffffff"
 
         }
     }
@@ -49,6 +50,8 @@ export default class Notes extends React.Component {
             service.addNote(data, token).then((data) => {
                 console.log("inised addnote")
                 getnotes();
+               
+               
           
             }).catch((error) => {
                 console.log(error)
@@ -66,7 +69,9 @@ export default class Notes extends React.Component {
                         < BrushIcon />
                         <ImageOutlinedIcon />
                     </div> :
-                    <div className="brieftakenote">
+                    <div className="brieftakenote" style={{
+                        backgroundColor: this.state.color
+                        }}>
                         <div className="inlinepin">
                             <InputBase
                                 defaultValue=""
@@ -87,7 +92,11 @@ export default class Notes extends React.Component {
                         />
                         <div>
                             <div className="enclose">
-                                < Icons />
+                                < Icons val="imgVal" handleColor={(data)=>{
+                                        this.setState({
+                                            color: data
+                                        })
+                }}/>
                                 <div class="inp">
                                     <input type="button" onClick={this.close} value="Close" />
                                 </div>

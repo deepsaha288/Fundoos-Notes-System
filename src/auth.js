@@ -6,7 +6,7 @@ class Auth {
   
     isAuthenticated() {
         let token =localStorage.getItem('Token');
-        if(token !== undefined){
+        if(token !== null){
             this.authenticated = true;
         }
       return this.authenticated;

@@ -21,8 +21,10 @@ export default class getNote extends React.Component {
         let token = localStorage.getItem('Token');
         console.log('called');
         service.getNote(token).then((res)=>{
-        console.log(this.state.notes);
+        console.log(res);
         this.filterData(res.data.data.data);
+        
+        
         })
     }
     

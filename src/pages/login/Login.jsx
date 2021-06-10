@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core'
 import UserService from "../../service/Userservice";
 import Snackbar from '@material-ui/core/Snackbar';
-import {BrowserRouter as Route, Link,Redirect } from 'react-router-dom';
+import { BrowserRouter as Route, Link, Redirect } from 'react-router-dom';
 
 const service = new UserService();
 
@@ -43,21 +43,21 @@ class Login extends React.Component {
         let patter = "^[0-9a-zA-Z]+([.\\-_+][0-9a-zA-Z]+)*@[a-z0-9A-Z]+.[a-z]{2,4}([.][a-zA-Z]{2,})*$";
         let pattern = new RegExp(patter);
         if (!pattern.test(this.state.username)) {
-            this.setState({ usernameError: true,usernameErrorMsg: "Invalid Gmail address" })
+            this.setState({ usernameError: true, usernameErrorMsg: "Invalid Gmail address" })
             valid = false;
         }
         if (this.state.username.length === 0) {
-            this.setState({ usernameError: true,usernameErrorMsg: "Choose Gmail address" })
+            this.setState({ usernameError: true, usernameErrorMsg: "Choose Gmail address" })
             valid = false;
         }
 
         if (this.state.password.length < 8) {
-            this.setState({ passwordError: true,passwordErrorMsg: "password should be atleast 8 characters"  })
+            this.setState({ passwordError: true, passwordErrorMsg: "password should be atleast 8 characters" })
             valid = false;
         }
 
         if (this.state.password.length === 0) {
-            this.setState({ passwordError: true, passwordErrorMsg: "Enter a password"})
+            this.setState({ passwordError: true, passwordErrorMsg: "Enter a password" })
             valid = false;
         }
 
@@ -74,7 +74,7 @@ class Login extends React.Component {
             let data = {
                 "email": this.state.username,
                 "password": this.state.password,
-            
+
             }
             service.login(data).then((result) => {
                 localStorage.setItem('Token', result.data.id);
@@ -83,7 +83,7 @@ class Login extends React.Component {
                 localStorage.setItem('Email', result.data.email);
                 localStorage.setItem('userDetails', JSON.stringify(result.data))
                 console.log(result.data.id)
-                this.setState({ snackmsg: "Login sucess",show: true })
+                this.setState({ snackmsg: "Login sucess", show: true })
                 this.dashboard();
 
             }).catch((error) => {
@@ -91,15 +91,14 @@ class Login extends React.Component {
             })
         }
         else {
-            this.setState({ snackmsg: "Please Enter Valid details",show: true  })
+            this.setState({ snackmsg: "Please Enter Valid details", show: true })
         }
     }
     dashboard = () => {
-        this.setState({ redirect: "/Dashboard"});
-      }
+        this.setState({ redirect: "/Dashboard" });
+    }
     render() {
-        if (this.state.redirect)
-        {
+        if (this.state.redirect) {
             return <Redirect to={this.state.redirect} />
         }
         return (
@@ -124,24 +123,24 @@ class Login extends React.Component {
                                     <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
                                     <label htmlFor="radio"> Show password</label>
                                 </div>
-                                <div className="forget"><Link to ="/ForgetPassword">ForgetPassword</Link></div>
+                                <div className="forget"><Link to="/ForgetPassword">ForgetPassword</Link></div>
                             </div>
                         </div>
                         <div className="inline__button">
                             <Link to="/">Create Account</Link>
                             < Button variant="outlined" size="small" onClick={this.submit}>Sign in</Button>
                             <Snackbar
-            anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-            }}
-            open={this.state.show}
-            autoHideDuration={1000}
-            onClose={this.handleClose}
-            message={this.state.snackmsg}
-            action={
-                <React.Fragment>
-                </React.Fragment>}  />
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.show}
+                                autoHideDuration={1000}
+                                onClose={this.handleClose}
+                                message={this.state.snackmsg}
+                                action={
+                                    <React.Fragment>
+                                    </React.Fragment>} />
                         </div>
                     </div>
                 </div>

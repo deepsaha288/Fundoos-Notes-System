@@ -17,21 +17,21 @@ export default class DisplayNotes extends React.Component {
             description: "",
             open: false,
             noteId: '',
-            color:null,
+            color: null,
         })
     }
 
-    setColor=(colorValue)=>{
+    setColor = (colorValue) => {
 
-        this.setState({ color : colorValue });
+        this.setState({ color: colorValue });
 
     }
 
-    updateNote = (e) => {
+    display = (e) => {
         e.stopPropagation();
         let token = localStorage.getItem("Token");
         const getnotes = this.context
-        console.log(getnotes) 
+        console.log(getnotes)
         let data = {
             title: this.state.title,
             description: this.state.description,
@@ -40,10 +40,11 @@ export default class DisplayNotes extends React.Component {
         console.log(data.noteId);
         if (data.title !== "" && data.description !== "") {
             service.updateNote(data, token).then((result) => {
-                 this.handleClose() 
+                this.handleClose() 
                 console.log(result);
                 getnotes();
                 this.filterData();
+                this.colorItem();
             }).catch((err) => {
                 console.log(err);
             })
@@ -55,7 +56,7 @@ export default class DisplayNotes extends React.Component {
     }
     handleTitle = (e) => {
         this.setState({ title: e.target.value })
-     
+
 
     }
     handleClickOpen = (e, value) => {
@@ -73,9 +74,9 @@ export default class DisplayNotes extends React.Component {
         console.log("im working");
         this.setState({ open: !this.state.open })
         console.log(this.state.open);
-        console.log(getnotes) 
+        console.log(getnotes)
         getnotes();
-       
+
     };
 
     render() {
@@ -83,17 +84,18 @@ export default class DisplayNotes extends React.Component {
             <>
                 <div className="notess">
                     {this.props.NotesArray.reverse().map((value, index) => {
-                        var style={backgroundColor:value.color}
+                        var style = { backgroundColor: value.color }
                         return (<div className="notebox" style={style}>
                             <div onClick={(e) => this.handleClickOpen(e, value)}>
-                              <div className="inline1">  <h4 style={{width:'90%'}}>{value.title}</h4>
-                                <img src={Pin} alt=""/></div>
+                                <div className="inline1">  <h4 style={{ width: '90%' }}>{value.title}</h4>
+                                    <img src={Pin} alt="" /></div>
                                 <p>{value.description}</p></div>
-                            <Icons Notes={value} SetColor={this.setColor} />  
-                                                
+                            <Icons Notes={value} SetColor={this.setColor} />
+
+
                         </div>)
                     })}
-                   
+
                 </div>
                 <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
                     <div className="dialogbox">
@@ -118,10 +120,11 @@ export default class DisplayNotes extends React.Component {
                             defaultValue={this.state.description}
                             inputProps={{ 'aria-label': 'Title ' }}
                         />
-                         <div className="enclose">
+                       
+                       <div className="enclose">
                                 < Icons />
                                 <div class="inp">
-                                    <input type="button" onClick={(e) => this.updateNote(e)} value="Close" />
+                                    <input type="button" onClick={(e) => this.display(e)} value="Close" />
                                 </div>
                             </div>
                     </div>

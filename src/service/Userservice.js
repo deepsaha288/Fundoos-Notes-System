@@ -89,7 +89,24 @@ class UserService{
             }
         })
     }
+    addCollaboratorNote =(token)=>{
+        return axioService.postMethod(`${baseUrl}notes/notes_AddcollaboratorsNotes`,
+        {
+            headers:{
+                'Authorization':token,
+            }
+        })
+    }
+    removeCollaboratorNote =(token)=>{
+        return axioService.postMethod(`${baseUrl}/notes/notes_removeCollaboratorsNotes`,
+        {
+            headers:{
+                'Authorization':token,
+            }
+        })
+    }
 
-}
+    }
+
 
 export default UserService;
