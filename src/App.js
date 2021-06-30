@@ -1,28 +1,26 @@
 import './App.css';
-import Registration from './pages/registration/Registration';
-import Login from './pages/login/Login';
-import Dashboard from './components/dashboard/Dashboard'
-import ForgetPassword from './pages/forgotpassword/ForgetPassword'
-import ResetPassword from './pages/resetpassword/ResetPassword';
-import { BrowserRouter as Router, Route,  Switch,} from 'react-router-dom';
-import { ProtectedRoute } from "./ProtectedRoute";
-const Routing =()=>{
-  return(
-  <Router>
-    <div>
-      <Switch>
-      <Route  exact path="/" component={Registration} ></Route>
-        <Route path="/Login" component={Login} ></Route>
-        <Route path="/ForgetPassword" component={ForgetPassword}></Route>
-        <Route path="/ResetPassword:/token" component={ResetPassword}></Route>
-       <ProtectedRoute path="/Dashboard" component={Dashboard} />
-       </Switch>
-    </div>
-  </Router>)
-}
+import Login from './components/login/Login';
+import { BrowserRouter, Switch,Route} from "react-router-dom";
+import {ProtectedRoute} from '../src/services/auth/protectedRoutes';
+import Registration from './components/registration/Registration';
+import Dashboard from './components/dashboard/Dashboard';
+import ForgetPassword from '../src/components/ForgetPassword/ForgetPassword';
+
+
+
 function App() {
   return (
-    <Router> <Routing /> </Router>
+    <BrowserRouter>
+  
+    <Switch>  
+    <Route exact path="/" component={Login}/>
+    <Route exact path="/Registration" component={Registration}/>
+    <ProtectedRoute path={'/dashboard'} component={Dashboard} />
+    <Route path="/ForgetPassword" component={ForgetPassword}></Route>
+    </Switch>
+    
+    </BrowserRouter>
   );
 }
+
 export default App;

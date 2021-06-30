@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import Header from '../header/Header';
-
+import Header from '../Header/Header';
 
 class Dashboard extends Component {
     render() {
-        console.log("render Dashboard")
         return (
            <Header/>
-           
         );
     }
 }

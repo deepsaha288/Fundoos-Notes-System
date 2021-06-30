@@ -1,0 +1,46 @@
+@mixin align() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon-open-content{
+    width: 230px;
+   display: flex;
+   justify-content: space-between;
+}
+.note-icons-hover{
+    @include align();
+    width: 35px;
+    height: 35px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+.note-icons-hover:hover {
+    background-color: rgb(228, 217, 217);
+}
+.i-disp{
+    cursor: pointer;
+    width: 18px  !important;
+
+}
+.i-disp :hover{
+   background-color: rgb(158, 145, 145);
+
+}
+
+.delete-palate:hover .disp-icn 
+{
+   display: block; 
+   color:#292a2b;
+}
+
+.color{
+    @include align();
+    width: 30px;
+    height: 30px;
+    margin: 1px;
+    border-radius: 15px;
+}
+.color:hover {
+    background-color: #c9cbce,
+  }

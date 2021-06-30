@@ -1,0 +1,99 @@
+@mixin  input($size) {
+    font-size: $size;
+    margin-left: 20px;
+}
+@mixin  align($width,$justify-content) {
+    display: flex;
+    justify-content: $justify-content;
+    align-items: center;
+    width: $width;
+}
+
+
+.collab-btn{
+    display: flex;
+    flex-direction: row-reverse;
+    cursor: pointer;
+    .collab-btn-cnt{
+        display: flex;
+        justify-content: space-around;
+        width: 220px;
+    }
+}
+.collab-data{
+    width: 350px;
+    display: flex;
+    justify-content: space-between;
+}
+.owner{
+    display: flex
+}
+.avatar-img{
+    margin-left: 22px;
+    margin-top: 7px;
+}
+.name-txt{
+    @include input(15px);
+    font-weight: bold;
+    margin-left: 20px;
+    margin-top: 7px;
+}
+
+.email-txt{
+    @include input(medium);
+}
+
+.collab-txt{
+    @include input(medium);
+    margin-top: 20px;
+}
+
+.collab-dtl{
+    @include align(530px,null);
+}
+
+.search-cnt{
+    @include align(300px,space-between);
+}
+.plus{
+    width: 43px;
+    height: 43px;
+    border: 2px solid #BDBDBD;
+    border-radius: 29px;
+    padding: 8px;
+    color: #BDBDBD;
+    margin-left: 20px;
+}
+.email-disp{
+    margin-left: 5px;
+}
+
+.on-close{
+    cursor: pointer;
+    position: absolute;
+    margin-left: 480px;
+    color: rgb(199, 175, 175);
+}
+.google {
+    display: flex;
+    height: 30px;
+    padding-left: 8px;
+    font-size: 24px;
+    justify-content: flex-start;
+    font-family: roboto, 'Noto Sans Myanmar UI', arial, sans-serif;
+  }
+  #f {
+    color: blue;
+  }
+  #u {
+    color: red;
+  }
+  #n {
+    color:yellow;
+  }
+  #d {
+    color: blue;
+  }
+  #o {
+    color: red;
+  }
