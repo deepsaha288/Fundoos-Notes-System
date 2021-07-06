@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
                 cursor:'pointer'
                 }}
                 onClick={()=>{
-                  props.putColor(val);
+                  props.putColor(val)
                   handleClick()}}>
                 </div>
             </div> )

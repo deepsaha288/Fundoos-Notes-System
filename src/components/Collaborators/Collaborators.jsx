@@ -12,6 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import CollabPoper from './collabPoper';
 
+
 const styles = {
     underline: {
         marginLeft: '20px',
@@ -62,11 +63,12 @@ class Collaborators extends Component {
     }
 
     addColaborator(val) {
+        console.log()
         let collaborators = val;
         service.addCollaborator(collaborators, this.props.note.id).then((data) => {
+            console.log('data', data);
             this.props.getNotes();
             this.props.getCloseStatus(false);
-            console.log('data', data);
         }).catch(error => {
             console.log('search', error);
         });

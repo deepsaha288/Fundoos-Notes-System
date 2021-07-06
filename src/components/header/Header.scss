@@ -15,6 +15,7 @@
     display: flex !important;
     justify-content: space-between !important;
 }
+
 .profilepic{
     
     margin-left: 40px;
@@ -43,6 +44,15 @@
     .text {
       display:none;
     }
+    // .makeStyles-drawer-6{
+//   position: relative;
+// }
+//  .makeStyles-drawer-7{
+//    position:absolute !important;
+// }
+//  .makeStyles-drawer-8{
+//    position:absolute!important;
+//  }
   }
 
   
@@ -55,6 +65,9 @@
       width: 165%;
     }
   }
+  .makeStyles-drawer-7{
+    position:absolute !important;
+ }
 
   .profile{
     display: flex;

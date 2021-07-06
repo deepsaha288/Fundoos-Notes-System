@@ -3,6 +3,7 @@ import TextField from '@material-ui/core/TextField';
 import './Registration.scss';
 import service from '../../services/userService';
 import Button from '@material-ui/core/Button';
+import logo from '../../assests/googleimg.svg'
 import {Redirect} from "react-router-dom"
 
 let NameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
@@ -230,8 +231,6 @@ export default class Registration extends Component {
                             </div>
                             <div className="message">Use 8 or more characters with a mix of letters, number & symbols</div>
                             <div className="show-checkbox">
-                                {/* <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
-                                <span>Show password</span> */}
                                 <input type="checkbox" id="radio" onClick={this.handleClick} value="Show password" />
                                     <label htmlFor="radio"> Show password</label>
                             </div>
@@ -248,7 +247,7 @@ export default class Registration extends Component {
                     <div>
                     </div>
                     <div className="logo-cont">
-                        <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt="" />
+                         <img src={logo} alt="" />
                         <span class="fig-caption">One account. All of Fundoo working for you.</span>
                     </div>
                 </div>

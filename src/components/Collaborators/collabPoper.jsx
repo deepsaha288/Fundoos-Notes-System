@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
         borderRadius: '3px',
         backgroundColor: 'white',
         overflow: 'scroll',
-        // padding: '0px 14px 0px 14px',
     },
     pop: {
         zIndex: "10000",

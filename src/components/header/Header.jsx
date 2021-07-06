@@ -31,8 +31,8 @@ import NoteBuilder from '../NoteBuilder/NoteBuilder';
 import { useEffect } from 'react';
 import Trash from '../trash/trash';
 import Archive from '../archive/archive';
-import { Switch, Link} from "react-router-dom";
-import {ProtectedRoute} from '../../services/auth/protectedRoutes';
+import { Route,Switch, Link} from "react-router-dom";
+// import {ProtectedRoute} from '../../services/auth/protectedRoutes';
 import Popover from './poppover';
 
 
@@ -183,7 +183,8 @@ export default function MiniDrawer() {
   const getNotes = () =>{
     service.getAllNotes().then((data) =>{
         console.log(data);
-        setNotes(data.data.data.data);        
+        setNotes(data.data.data.data);
+             
 
     }).catch(error=>{
       console.log("error",error);
@@ -317,7 +318,7 @@ export default function MiniDrawer() {
      
       <div className="create-part">
           <Switch>
-									<ProtectedRoute className={classes.sideIcon}
+									<Route className={classes.sideIcon}
 									 exact path={"/dashboard"}
 										component={NoteBuilder}
 									>
@@ -325,8 +326,8 @@ export default function MiniDrawer() {
                     <Createnotes get={getNotes}/>
                     <NoteBuilder value={notes} get={getNotes}/>
                     </div>
-                  </ProtectedRoute>
-                  <ProtectedRoute className={classes.sideIcon}
+                  </Route>
+                  <Route className={classes.sideIcon}
 									 exact path={"/dashboard/Notes"}
 										component={NoteBuilder}
 									>
@@ -334,8 +335,8 @@ export default function MiniDrawer() {
                     <Createnotes get={getNotes}/>
                     <NoteBuilder value={notes} get={getNotes}/>
                     </div>
-                  </ProtectedRoute>
-                  <ProtectedRoute className={classes.sideIcon}
+                  </Route>
+                  <Route className={classes.sideIcon}
 									 exact path={"/dashboard/Reminder"}
 										component={NoteBuilder}
 									>
@@ -343,8 +344,8 @@ export default function MiniDrawer() {
                     <Createnotes get={getNotes}/>
                     <NoteBuilder value={notes} get={getNotes}/>
                     </div>
-                  </ProtectedRoute>
-                  <ProtectedRoute className={classes.sideIcon}
+                  </Route>
+                  <Route className={classes.sideIcon}
 									 exact path={"/dashboard/Editlabels"}
 										component={NoteBuilder}
 									>
@@ -352,22 +353,22 @@ export default function MiniDrawer() {
                     <Createnotes get={getNotes}/>
                     <NoteBuilder value={notes} get={getNotes}/>
                     </div>
-                  </ProtectedRoute>
-                  <ProtectedRoute className={classes.sideIcon}
+                  </Route>
+                  <Route className={classes.sideIcon}
 									 exact path={"/dashboard/Trash"}
 										component={Trash}
 									>
                     <div className="create"> 
                   <Trash value={notes} get={getNotes}/>
                   </div>
-                  </ProtectedRoute>
-                  <ProtectedRoute className={classes.sideIcon}
+                  </Route>
+                  <Route className={classes.sideIcon}
 									 exact path={"/dashboard/Archive"}
 										component={Archive}> 
                     <div className="create"> 
                   <Archive value={notes} get={getNotes}/>
                   </div>
-                  </ProtectedRoute>
+                  </Route>
                   
 					</Switch>
       </div>

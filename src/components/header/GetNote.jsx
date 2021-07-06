@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import service from '../../services/userService'; 
 import './Header.scss';
 import Createnotes from '../createNotes/Createnotes';
-import NoteMaker from '../noteMaker/NoteMaker';
+import NoteBuilder from '../NoteBuilder/NoteBuilder';
 
 class GetNote extends Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class GetNote extends Component {
         return (
             <div className="create">
                 <Createnotes get={this.getNotes}/>
-                <NoteMaker value={this.state.notes} get={this.getNotes}/>
+                <NoteBuilder value={this.state.notes} get={this.getNotes}/>
             </div>
 
         );

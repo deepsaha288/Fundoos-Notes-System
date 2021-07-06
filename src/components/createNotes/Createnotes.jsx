@@ -60,13 +60,14 @@ class Createnotes extends Component {
 
     }
 
-    handleClickClose=(state1,state2)=>{
+    handleClickClose=(stateArchive,stateDelete)=>{
         let userData = {
         title: this.state.title,
         description: this.state.note,
         color:this.state.color,
-        isArchived:state1,
-        isDeleted:state2
+        isArchived:stateArchive,
+        isDeleted:stateDelete,
+        // collaborator:this.state.collaborators
         }
 
     if(!this.state.color){
@@ -74,7 +75,7 @@ class Createnotes extends Component {
         console.log("colordata",userData.color);
     }  
 
-    else if(this.state.title !== "" || this.state.description !== ""){
+     if(this.state.title !== "" || this.state.description !== ""){
         console.log("success");
         service.addNotes(userData).then((data) =>{
             console.log('data after added note',data);
@@ -85,7 +86,9 @@ class Createnotes extends Component {
                 responce: true,
                 color:""
               },()=>{console.log(this.state);})
+            // this.props.addColaborator();
             this.props.get();
+
         })
         .catch(error=>{
             this.setState({
@@ -110,7 +113,6 @@ class Createnotes extends Component {
 }
 
 
-
 handleInput = (e) => {
         this.setState({
             [e.target.name]: e.target.value
@@ -124,7 +126,7 @@ handleInput = (e) => {
           {this.state.open ? (
                 <div className="takenote" onClick={this.handleClick} >
                     <div className="input-feild"  >
-                        <div className="inputText" type="text" >Take a Note...</div>
+                        <div className="inputText" type="text" >Take a Note</div>
                             <div classname="imgIconClose">
                                 <CheckBoxOutlinedIcon/>
                                 <BrushIcon/>
@@ -141,9 +143,7 @@ handleInput = (e) => {
                             <TextField 
                                 id="standard-multiline-flexible" 
                                 className={classes.underline} className={classes.widthInp}
-                                name="title"
-                                multiline rowsMax={2} 
-                                placeholder="Title"
+                                name="title" multiline rowsMax={2} placeholder="Title"
                                 onChange={this.handleInput} />
                             <img src={pin} className="pin-inp" alt="" />
                         </div>
@@ -151,9 +151,7 @@ handleInput = (e) => {
                             <TextField 
                                 id="standard-multiline-flexible" 
                                 className={classes.underline,classes.widthInp}
-                                name="note"
-                                multiline rowsMax={2} 
-                                placeholder="Note"
+                                name="note" multiline rowsMax={2}  placeholder="Note"
                                 onChange={this.handleInput} />
                         </div>
                         <div className="icon-open">
@@ -161,8 +159,10 @@ handleInput = (e) => {
                             <Icons colorval="create" 
                             archiveNote="archiveCreate" 
                             deleteNote="deleteCreate" 
+                            // collaboratorNote="collaboratorCreate"
                             archiveCreate={()=>this.handleClickClose(true,false)}
                             deleteCreate={()=>this.handleClickClose(false,true)}
+                            // collaboratorNote={()=>this.handleClickClose(true,false)}
                              val={this.state}  
                             getColor={this.handleColor}/>
                         </div>

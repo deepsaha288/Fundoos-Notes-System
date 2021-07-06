@@ -17,7 +17,8 @@ class Icons extends Component {
         super(props);
         this.state = {
             anchorEl: null,
-            openStatus: false
+            openStatus: false,
+            
         }
 
     }
@@ -34,19 +35,20 @@ class Icons extends Component {
             anchorEl: event.currentTarget
         })
     }
+
     getPhoto = (e) => {
         console.log(e.target.files)
         const fromdata=new FormData();
-        fromdata.append("noteId", this.props.value.id)
+        fromdata.append("noteId", this.props.val.id)
         fromdata.append("file", e.target.files[0].name)
-        fromdata.append("title", this.state.title)
-        fromdata.append("describption", this.state.description)
-        console.log(fromdata)
+        fromdata.append("title", this.props.val.title)
+        fromdata.append("description", this.props.val.description)
+        console.log(this.props.val.id)
+        console.log(fromdata.entries())
         let token = localStorage.getItem("Token");
 
-        service.updateNote(fromdata,token).then((result) => {
+        service.updateNote(fromdata).then((result) => {
           console.log(result);
-          this.props.putImage();
         }).catch((err) => {
           console.log(err);
         })
@@ -60,7 +62,7 @@ class Icons extends Component {
             };
             service.changeColor(Data).then((data) => {
                 console.log('Color Note', data);
-                this.props.get();
+                 this.props.get();
             }).catch(error => {
                 console.log('Color error', error);
             });
@@ -98,7 +100,7 @@ class Icons extends Component {
                     </div>
                     <div className="note-icons-hover">
                         <Popper putColor={(Data) => {
-                            this.onSetColor(Data);
+                            this.onSetColor(Data)
                         }} />
                     </div>
                     <div className="note-icons-hover">

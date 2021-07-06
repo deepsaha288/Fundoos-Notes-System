@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Icons from '../Icons/Icons';
-import "./Display.scss"
+import "./Displaynotes.scss"
 import pin from '../../assests/pin.svg';
 import service from '../../services/userService';
 import Dialog from '@material-ui/core/Dialog';
@@ -97,11 +97,7 @@ class Displaynotes extends Component {
         const chars = name.split('');
         return (
             <Tooltip title={name}>
-            <div style={{
-                backgroundColor: this.props.value.color,
-                marginLeft:'5px',
-                marginRight:'4px'
-            }}>
+         <div style={{ backgroundColor: this.props.value.color, marginLeft:'5px', marginRight:'4px' }}>
             <Avatar alt={chars[0]} src={chars[0]} />
             </div>
             </Tooltip>
@@ -109,7 +105,8 @@ class Displaynotes extends Component {
         });
         return (
                 <div className="note" style={{
-                    backgroundColor: this.props.value.color
+                    backgroundColor: this.props.value.color,
+                    backgroundImage:this.props.File,
                     }}>
                     <div className="title-pinn"
                         onClick={() => {
@@ -200,7 +197,7 @@ class Displaynotes extends Component {
                                     this.onDelete();
                                 }}
                                 colorval="update"
-                                archive="archiveUpdate"
+                                archiveNote="archiveUpdate"
                                 deleteNote="deleteUpdate"
                                 val={this.props.value}
                                 get={() => { this.props.get() }}
@@ -210,7 +207,6 @@ class Displaynotes extends Component {
                         <div className="dialog-close"
                             onClick={() => {
                                 this.onUpdate();
-                                this.props.get();
                                 this.setState({
                                     openStatus: !this.state.openStatus
                                 });

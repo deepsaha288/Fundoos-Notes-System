@@ -10,16 +10,16 @@ export default class ForgetPassword extends React.Component {
     constructor(probs) {
         super(probs);
         this.state = {
-            username: ""
+            username: "",
+          
         }
     }
 
     submit = () => {
         let data = {
-            email: this.state.username,
+            "email": this.state.username,
         }
         service.forgetpassword(data).then((result) => {
-          
             console.log(result);
         }).catch((error) => {
             console.log(error);
@@ -27,7 +27,9 @@ export default class ForgetPassword extends React.Component {
     }
 
     handleChange = (e) => {
-        this.setState({ username: e.target.value })
+        let name = e.target.name;
+        let value = e.target.value;
+        this.setState({ [name]: value })
     }
 
     render() {
