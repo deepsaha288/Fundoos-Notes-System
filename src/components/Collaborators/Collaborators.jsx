@@ -55,15 +55,16 @@ class Collaborators extends Component {
                 this.setState({
                     collaboratorData: data.data.data.details
                 });
-                console.log('searchCollab', data);
+                console.log('search Collborator data', data);
             }).catch(error => {
-                console.log('searchCollab', error);
+                console.log('search Collaborator data', error);
             });
         }
     }
 
     addColaborator(val) {
-        console.log()
+        console.log(this.props)
+         if( this.props.colorval==="update"){
         let collaborators = val;
         service.addCollaborator(collaborators, this.props.note.id).then((data) => {
             console.log('data', data);
@@ -72,9 +73,14 @@ class Collaborators extends Component {
         }).catch(error => {
             console.log('search', error);
         });
-    }
+     } else {
+         this.props.getCollaborator(val);
+        //  this.props.getCloseStatus(false);
+        //  this.props.saveCollaborator();
+     }
+}
 
-    colabArr = (val) => {
+    collaboratorArray = (val) => {
         return (
             <MenuItem
                 style={{ cursor: "pointer" }}>
@@ -129,18 +135,26 @@ class Collaborators extends Component {
 
     render() {
         const { classes } = this.props;
-        const collaboratorDetails = this.props.note.collaborators.map((data, index) => {
+        let arr=[]
+        if( this.props.colorval === "update"){
+            arr = this.props.note.collaborators
+        }else{
+            arr.push(this.props)
+        }
+        console.log(this.props.note.collaborators,arr)
+
+        const collaboratorDetails = arr.map((data) => {
             let name = data.firstName
-            const chars = name.split('');
+           
             return (
-                <MenuItem key={index} >
+                <MenuItem>
                     <div className="collab-dtl">
                         <Tooltip title={name}>
                             <div style={{
                                 marginLeft: '5px',
                                 marginRight: '4px'
                             }}>
-                                <Avatar alt={chars[0]} src={chars[0]} />
+                                <Avatar />
                             </div>
                         </Tooltip>
                         <span className="email-disp">{data.email}</span>
@@ -213,7 +227,8 @@ class Collaborators extends Component {
                         <CollabPoper List={this.state.collaboratorData}
                         open={this.state.openPopper}
                         collabAdd={(data)=>
-                                    this.addColaborator (data)
+                            this.addColaborator (data)
+
                         }/>
                        
                     </div>

@@ -3,6 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import './Login.scss';
 import service from '../../services/userService';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import {Redirect} from "react-router-dom"
 
     let UserNameRegex = /^([a-zA-Z0-9]*[+._-]*[a-zA-Z0-9]+@[a-zA-Z]+.{3}[a-zA-z.]*[a-zA-z]{2})+$/;
@@ -97,6 +100,15 @@ export default class Login extends Component {
     redirectToDashboard() {
         this.setState({redirect: "/Dashboard"});
     }
+
+    handleClose = (event, reason) =>{
+        if (reason === 'clickaway') {
+            return;
+          }
+      
+          this.setState({open :false});
+
+    }
     render() {
         if(this.state.redirect){
             return <Redirect to ={this.state.redirect}/>
@@ -115,8 +127,8 @@ export default class Login extends Component {
         return (
                 <>
                  <div className="login-frame">
-                 <form className="login-form">
-                    <div className="login-cont">    
+                 <form className="login">
+                    <div className="login-con">    
                         <div className="login-fundoo">
                             <span className="f">F</span>
                             <span className="u">u</span>
@@ -156,7 +168,6 @@ export default class Login extends Component {
                         />
                     <div className="pwdchange">
                     <span className="forget" onClick={this.forgetPassword}>Forget Password?</span>
-                    <span className="forget">Reset Password?</span>
                     </div>
 
                     </div>
@@ -165,7 +176,27 @@ export default class Login extends Component {
                                     <Button className="button" variant="contained" color="primary" href="#contained-buttons" onClick={this.Next}>
                                         Next
                                      </Button>
-                                </div>
+                                     <Snackbar
+                                anchorOrigin={{
+                                    vertical: 'bottom',
+                                    horizontal: 'left',
+                                }}
+                                open={this.state.open}
+                                autoHideDuration={6000}
+                                onClose={this.handleClose}
+                                message=" LOGIN SUCESSFUL "
+                                action={
+                                    <React.Fragment>
+                                        <Button color="secondary" size="small" onClick={this.handleClose}>
+                                            UNDO
+                                        </Button>
+                                        <IconButton size="small" aria-label="close" color="inherit" onClick={this.handleClose}>
+                                            <CloseIcon fontSize="small" />
+                                        </IconButton>
+                                    </React.Fragment>
+                                }
+                            />
+                         </div>
 
                     </form>
                 </div>

@@ -23,7 +23,7 @@ class UserService{
 
     login(data){
        let url = baseURL+'user/login';
-       return this.axios.post(url,data);
+       return this.axios.post(url,data,false);
     }
 
     register(data){
@@ -44,12 +44,12 @@ class UserService{
      changeColor(data) 
     {
         let url = baseURL+'notes/changesColorNotes';
-        return this.axios.post(url,data);
+        return this.axios.post(url,data,configHeader);
     }
 
     deleteNote(data){
         let url = baseURL+'notes/trashNotes';
-        return this.axios.post(url,data);
+        return this.axios.post(url,data,configHeader);
     }
 
     archiveNote(data){

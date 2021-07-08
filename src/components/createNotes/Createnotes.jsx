@@ -42,11 +42,12 @@ class Createnotes extends Component {
             note: "",
             responce: false,
             color:"#ffffff",
-            collaborators:[]
+            collaborators:[],
+            image:""
         }
 
     }
-    handleClick=()=>{
+    handleClickTitle=()=>{
         console.log("hello");
         this.setState({
             open: false
@@ -59,34 +60,42 @@ class Createnotes extends Component {
         });
 
     }
+    getImage=(data)=>{
+        this.setState({
+            image:data
+        });
 
-    handleClickClose=(stateArchive,stateDelete)=>{
-        let userData = {
-        title: this.state.title,
-        description: this.state.note,
-        color:this.state.color,
-        isArchived:stateArchive,
-        isDeleted:stateDelete,
-        // collaborator:this.state.collaborators
-        }
+    }
+    getCollaborator=(data)=>{
+        this.setState({
+            collaborators:data,
+          
+        });
+    }
 
-    if(!this.state.color){
-        userData.color = this.state.color;
-        console.log("colordata",userData.color);
-    }  
+    handleClickClose=(stateArchive)=>{
+        const fromdata=new FormData();
+        fromdata.append("file", this.state.image)
+        fromdata.append("title", this.state.title)
+        fromdata.append("description", this.state.note)
+        fromdata.append("isArchived",stateArchive)
+        fromdata.append("color",this.state.color)
+        fromdata.append("collaberators",this.state.collaborators)
+        console.log(fromdata)
 
      if(this.state.title !== "" || this.state.description !== ""){
         console.log("success");
-        service.addNotes(userData).then((data) =>{
+        service.addNotes(fromdata).then((data) =>{
             console.log('data after added note',data);
             this.setState({
                 open: true,
                 title: "",
                 note: "",
                 responce: true,
-                color:""
+                color:"",
+                collaborators:"",
+                image:""
               },()=>{console.log(this.state);})
-            // this.props.addColaborator();
             this.props.get();
 
         })
@@ -96,7 +105,9 @@ class Createnotes extends Component {
                 title: "",
                 note: "",
                 responce: true,
-                color:""
+                color:"",
+                collaborators:"",
+                image:""
               },()=>{console.log(this.state);})
             console.log('Error',error);
         });
@@ -124,7 +135,7 @@ handleInput = (e) => {
         return (
             <>
           {this.state.open ? (
-                <div className="takenote" onClick={this.handleClick} >
+                <div className="takenote" onClick={this.handleClickTitle} >
                     <div className="input-feild"  >
                         <div className="inputText" type="text" >Take a Note</div>
                             <div classname="imgIconClose">
@@ -159,12 +170,13 @@ handleInput = (e) => {
                             <Icons colorval="create" 
                             archiveNote="archiveCreate" 
                             deleteNote="deleteCreate" 
-                            // collaboratorNote="collaboratorCreate"
                             archiveCreate={()=>this.handleClickClose(true,false)}
                             deleteCreate={()=>this.handleClickClose(false,true)}
-                            // collaboratorNote={()=>this.handleClickClose(true,false)}
-                             val={this.state}  
-                            getColor={this.handleColor}/>
+                            val={this.state} 
+                            getImage={this.getImage} 
+                            getColor={this.handleColor}
+                            getCollaborator={this.getCollaborator}
+                            />
                         </div>
                             <div onClick={()=>this.handleClickClose(false,false)} className="icon-open-close">Close</div>
 

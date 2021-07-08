@@ -23,11 +23,13 @@ const styles = {
 class Displaynotes extends Component {
     constructor(props) {
         super(props)
-
         this.state = {
             openStatus: false,
             title: '',
-            description: ''
+            description: '',
+            image:'',
+            collaborators:[],
+            file:''
         }
 
     }
@@ -72,15 +74,17 @@ class Displaynotes extends Component {
     onUpdate = () => {
         let Data = {
             noteId: this.props.value.id,
+            file:this.state.image,
             title: this.state.title,
             description: this.state.description
         };
         service.updateNote(Data).then((data) => {
-            console.log('Update Note', data);
+            console.log(data);
+            this.props.get();
         }).catch(error => {
             console.log('Update error', error);
         })
-        console.log("Update", Data);
+        console.log(Data);
     }
 
     handleInput = (e) => {
@@ -88,13 +92,33 @@ class Displaynotes extends Component {
             [e.target.name]: e.target.value
         }, () => { console.log(this.state); })
     }
+    addImage =(file)=>{
+        debugger;
+        let apiInputData = new FormData();
+
+        apiInputData.set("title",Boolean(this.state.title) ? this.state.title : this.props.value.title );
+        apiInputData.set(
+          "description",
+          Boolean(this.state.description) ? this.state.description : this.props.value.description 
+        );
+        apiInputData.set("file", Boolean(file) ? this.state.file : "");
+        debugger;
+        console.log("file image", file);
+        service.updateNote(apiInputData).then((data) => {
+            console.log('Update Note', data);
+        }).catch(error => {
+            console.log('Update error', error);
+        })
+
+    }
 
     render() {
+        console.log(this.props.value.imageUrl)
         const { classes } = this.props;
-        
-        const collaboratorDetails = this.props.value.collaborators.map((data)=>{
+        const collaboratorDetails = this.props.value.collaborators.map((data,index)=>{
         let name = data.firstName
         const chars = name.split('');
+       
         return (
             <Tooltip title={name}>
          <div style={{ backgroundColor: this.props.value.color, marginLeft:'5px', marginRight:'4px' }}>
@@ -106,14 +130,15 @@ class Displaynotes extends Component {
         return (
                 <div className="note" style={{
                     backgroundColor: this.props.value.color,
-                    backgroundImage:this.props.File,
                     }}>
+                    <img src={this.props.value.imageUrl}/>
                     <div className="title-pinn"
                         onClick={() => {
                             this.setState({
                                 openStatus: !this.state.openStatus,
                                 title: this.props.value.title,
-                                description: this.props.value.description
+                                description: this.props.value.description,
+                                file:this.props.value.image
                             })
                         }}>
                         <div className="title-note">
@@ -140,6 +165,7 @@ class Displaynotes extends Component {
                                 delete={() => {
                                     this.onDelete();
                                 }}
+                                
                                 archiveNote="archiveUpdate"
                                 deleteNote="deleteUpdate"
                                 colorval="update"
@@ -147,7 +173,7 @@ class Displaynotes extends Component {
                                 get={() => { this.props.get() }}/>
                         </div>
                     </div>
-                <Dialog
+                    <Dialog
                     open={this.state.openStatus}>
                     <div
                         className="dialog-body"
@@ -216,7 +242,6 @@ class Displaynotes extends Component {
                 </div>
                 </Dialog>
             </div>
-
         );
     }
 }

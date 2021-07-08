@@ -35,32 +35,27 @@ export default  function ResetPassword () {
     const updateNewPassword = e => setnewpassword(e.target.value);
     
     let {token } = useParams();
-    console.log(token);
-     
+    console.log(token);  
+
+ 
         return (
             <>
              
-        <div className="fget-frame">
-                <div className="fget-form">
-                    <div className="fget-cont">   
-                    <div className="login-fundoo">
-                            <span className="f">F</span>
-                            <span className="u">u</span>
-                            <span className="n">n</span>
-                            <span className="d">d</span>
-                            <span className="o">o</span>
-                            <span className="u">o</span>
-                        </div>
-                        <p className="fonty"> Reset Password </p>
+             <div className="fullbody">
+                <div className="loginbody">
+                    <div className="topcontent">
+                        <div className="google">  <span id="f">F</span><span id="u">u</span><span id="n">n</span>
+                            <span id="d">d</span><span id="o">oo</span></div>
+                        <p className="font"> Reset Password </p>
                         <div className="textfield">   
-                            <TextField id="outlined-basic" className="update-field" variant="outlined" name="password"
+                            <TextField id="outlined-basic" type="password" className="update-field" variant="outlined" name="password"
                             label="password" size="small"  margin="dense" onChange={updatePassword} />
-                            <TextField id="outlined-basic" className="update-field" variant="outlined" name="confirmpassword"
+                            <TextField id="outlined-basic"type="password" className="update-field" variant="outlined" name="confirmpassword"
                             label="confirm password" size="small" margin="dense" onChange={updateNewPassword} />
                             </div>
                     </div>
-                    <div className="inline__button">
-                    <Link to="/"  className=" Text-Cont">Back</Link> 
+                    <div className="button">
+                        <Link to="/">Back</Link>
                         < Button variant="outlined" size="small" onClick={submit}>submit</Button>
                         
                     </div>

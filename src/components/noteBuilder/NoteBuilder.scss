@@ -2,4 +2,10 @@
     display: flex;
    flex-wrap: wrap;
    justify-content:flex-start;
+//    margin-left: 15%;
+}
+@media screen and (width: 360px) {
+    .note-disp{
+    margin-left: 10%;
+    }
 }

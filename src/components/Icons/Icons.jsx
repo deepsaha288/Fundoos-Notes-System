@@ -10,6 +10,7 @@ import Menu from "@material-ui/core/Menu";
 import Popper from './popper';
 import service from '../../services/userService';
 import Tooltip from '@material-ui/core/Tooltip';
+import image from '../../assests/image.svg';
 import Collaborators from '../Collaborators/Collaborators';
 
 class Icons extends Component {
@@ -18,6 +19,10 @@ class Icons extends Component {
         this.state = {
             anchorEl: null,
             openStatus: false,
+            title: '',
+            description: '',
+            file:'',
+            noteId: '',
             
         }
 
@@ -37,22 +42,34 @@ class Icons extends Component {
     }
 
     getPhoto = (e) => {
-        console.log(e.target.files)
-        const fromdata=new FormData();
-        fromdata.append("noteId", this.props.val.id)
-        fromdata.append("file", e.target.files[0].name)
-        fromdata.append("title", this.props.val.title)
-        fromdata.append("description", this.props.val.description)
-        console.log(this.props.val.id)
-        console.log(fromdata.entries())
-        let token = localStorage.getItem("Token");
-
-        service.updateNote(fromdata).then((result) => {
-          console.log(result);
-        }).catch((err) => {
-          console.log(err);
-        })
-      }
+        if( this.props.colorval==="update"){
+            console.log(e.target.files)
+            const fromdata=new FormData();
+            fromdata.append("noteId", this.props.val.id)
+            fromdata.append("file", e.target.files[0].name)
+            fromdata.append("title", this.props.val.title)
+            fromdata.append("description", this.props.val.description)
+            console.log(this.props.val.id)
+            console.log(fromdata.entries())
+            let token = localStorage.getItem("Token");
+    
+            service.updateNote(fromdata).then((result) => {
+              console.log(result);
+            }).catch((err) => {
+              console.log(err);
+            })
+          }
+          else{
+              this.props.getImage(e.target.files[0].name);
+          }
+        }
+        
+    fileChangedHandler = (event) => {
+    event.preventDefault();
+    console.log(event.target.files[0]);
+    this.setState({ file: event.target.files[0] });
+  };  
+        
 
     onSetColor = (color) => {
         if (this.props.colorval === "update") {
@@ -82,9 +99,28 @@ class Icons extends Component {
         this.setState({
             openStatus: true
         });
-    }
+    } 
 
     render() {
+        console.log(this.props)
+        let colabdata= '';
+        if(this.state.openStatus){
+        colabdata= <Collaborators 
+         getCollaborator={ 
+             this.props.colorval === "update" ?
+             ""
+             :
+             this.props.getCollaborator}
+             
+            open={this.state.openStatus}
+            note={this.props.val}
+            colorval={this.props.colorval}
+            getCloseStatus={(Data) => {
+                this.onSetStatus(Data);
+                
+            }}
+            getNotes={() => { this.props.get()  }} />
+        }
         return (
             <div>
                 <div className="icon-open-content">
@@ -105,9 +141,22 @@ class Icons extends Component {
                     </div>
                     <div className="note-icons-hover">
                         <Tooltip title="Image">
-                            {/* <ImageOutlinedIcon className="icon-display" > */}
-                            <input type="file" onChange={(e) =>{ this.getPhoto(e);}} />
-                            {/* </ImageOutlinedIcon> */}
+                            <label htmlFor="icon-button-photo">
+                            <input
+                            type="file"
+                            style={{ display: "none" }}
+                            onChange={(e) =>{ this.getPhoto(e);}}
+                            ref={(fileUpload) => (this.fileUpload = fileUpload)}
+                            ></input>
+                            <img
+                            className="file"
+                            onClick={() => this.fileUpload.click()}
+                            file={() => this.fileChangedHandler}
+                            src={image}
+                            label="New note with image"
+                            alt="note"
+                            />
+                        </label>
                         </Tooltip>
                     </div>
                     <div className="note-icons-hover">
@@ -155,13 +204,9 @@ class Icons extends Component {
 
                     </div>
                 </div>
-                <Collaborators
-                    open={this.state.openStatus}
-                    note={this.props.val}
-                    getCloseStatus={(Data) => {
-                        this.onSetStatus(Data);
-                    }}
-                    getNotes={() => { this.props.get() }} />
+                {
+               colabdata
+                }
             </div>
         );
     }

@@ -1,14 +1,11 @@
-// @import url("../registration/Registration.scss");
-
 
 .login-frame{
-   
     display: flex;
     justify-content: center;
     align-items: center;
    
 }
-.login-form{
+.login{
     width: 380px;
     border: 2px solid #EDEEF0;
     height: 500px;
@@ -19,7 +16,7 @@
     padding: 20px;
 
 }
-.login-cont{
+.login-con{
     height: 25%;
     width: 100%;
     display: flex;
@@ -57,6 +54,13 @@
     .login-form{ 
         height: 600px;
         margin-top: 0px;
+    }
+    .login-frame{
+        height: 490px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       
     }
   }
 

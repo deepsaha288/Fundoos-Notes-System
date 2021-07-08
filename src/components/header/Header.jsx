@@ -32,7 +32,6 @@ import { useEffect } from 'react';
 import Trash from '../trash/trash';
 import Archive from '../archive/archive';
 import { Route,Switch, Link} from "react-router-dom";
-// import {ProtectedRoute} from '../../services/auth/protectedRoutes';
 import Popover from './poppover';
 
 
