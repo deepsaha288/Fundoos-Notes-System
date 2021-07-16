@@ -19,11 +19,11 @@ $margin-left: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 700px;
+    height: 620px;
 }
 .reg-frame{
     border: 2px solid #EDEEF0;
-    height: 680px;
+    height: 600px;
     border-radius: 10px;
     display: flex;
     margin-top: 49px;
@@ -40,6 +40,9 @@ $margin-left: 40px;
     margin-top: 15px;
     font-size: 20px;
     font-weight: 500;
+}
+.MuiFormControl-root{
+    margin: 7px !important;
 }
 
 .fundoo{

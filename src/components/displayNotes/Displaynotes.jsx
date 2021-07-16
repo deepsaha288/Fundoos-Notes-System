@@ -92,25 +92,8 @@ class Displaynotes extends Component {
             [e.target.name]: e.target.value
         }, () => { console.log(this.state); })
     }
-    addImage =(file)=>{
-        debugger;
-        let apiInputData = new FormData();
 
-        apiInputData.set("title",Boolean(this.state.title) ? this.state.title : this.props.value.title );
-        apiInputData.set(
-          "description",
-          Boolean(this.state.description) ? this.state.description : this.props.value.description 
-        );
-        apiInputData.set("file", Boolean(file) ? this.state.file : "");
-        debugger;
-        console.log("file image", file);
-        service.updateNote(apiInputData).then((data) => {
-            console.log('Update Note', data);
-        }).catch(error => {
-            console.log('Update error', error);
-        })
-
-    }
+   
 
     render() {
         console.log(this.props.value.imageUrl)
@@ -131,7 +114,6 @@ class Displaynotes extends Component {
                 <div className="note" style={{
                     backgroundColor: this.props.value.color,
                     }}>
-                    <img src={this.props.value.imageUrl}/>
                     <div className="title-pinn"
                         onClick={() => {
                             this.setState({
@@ -141,14 +123,17 @@ class Displaynotes extends Component {
                                 file:this.props.value.image
                             })
                         }}>
+                  
                         <div className="title-note">
                             <div className='title-frame'>
                                 {this.props.value.title}
                             </div>
+                            <div>
                             <img className="pin-inp"
                                 src={pin} alt="" />
+                              </div>  
                         </div>
-
+                    {/* <img src={"http://fundoonotes.incubation.bridgelabz.com/" +this.props.value.imageUrl}/> */}
                         <div className="description-note">
                             {this.props.value.description}
                         </div>

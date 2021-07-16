@@ -29,8 +29,8 @@ import Createnotes from '../createNotes/Createnotes';
 import Keep from '../../assests/keep.png'
 import NoteBuilder from '../NoteBuilder/NoteBuilder';
 import { useEffect } from 'react';
-import Trash from '../trash/trash';
-import Archive from '../archive/archive';
+import Trash from '../../pages/trash/trash';
+import Archive from '../../pages/archive/archive';
 import { Route,Switch, Link} from "react-router-dom";
 import Popover from './poppover';
 

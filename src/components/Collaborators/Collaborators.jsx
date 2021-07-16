@@ -75,8 +75,7 @@ class Collaborators extends Component {
         });
      } else {
          this.props.getCollaborator(val);
-        //  this.props.getCloseStatus(false);
-        //  this.props.saveCollaborator();
+          this.closeDialog();
      }
 }
 

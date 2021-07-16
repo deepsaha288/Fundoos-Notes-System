@@ -42,7 +42,7 @@ class Createnotes extends Component {
             note: "",
             responce: false,
             color:"#ffffff",
-            collaborators:[],
+            collaborators:"",
             image:""
         }
 
@@ -72,7 +72,7 @@ class Createnotes extends Component {
           
         });
     }
-
+  
     handleClickClose=(stateArchive)=>{
         const fromdata=new FormData();
         fromdata.append("file", this.state.image)
@@ -80,8 +80,11 @@ class Createnotes extends Component {
         fromdata.append("description", this.state.note)
         fromdata.append("isArchived",stateArchive)
         fromdata.append("color",this.state.color)
-        fromdata.append("collaberators",this.state.collaborators)
-        console.log(fromdata)
+        if(this.state.collaborators !== ""){
+        fromdata.append("collaberators",JSON.stringify([this.state.collaborators]))
+        }
+        console.log(fromdata, this.state.collaborators)
+
 
      if(this.state.title !== "" || this.state.description !== ""){
         console.log("success");
@@ -154,7 +157,7 @@ handleInput = (e) => {
                             <TextField 
                                 id="standard-multiline-flexible" 
                                 className={classes.underline} className={classes.widthInp}
-                                name="title" multiline rowsMax={2} placeholder="Title"
+                                 name="title" multiline rowsMax={2} placeholder="Title"
                                 onChange={this.handleInput} />
                             <img src={pin} className="pin-inp" alt="" />
                         </div>

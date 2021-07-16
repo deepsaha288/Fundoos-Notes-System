@@ -39,15 +39,22 @@ export default  function ResetPassword () {
 
  
         return (
-            <>
-             
-             <div className="fullbody">
-                <div className="loginbody">
-                    <div className="topcontent">
-                        <div className="google">  <span id="f">F</span><span id="u">u</span><span id="n">n</span>
-                            <span id="d">d</span><span id="o">oo</span></div>
-                        <p className="font"> Reset Password </p>
-                        <div className="textfield">   
+            <>    
+             <div className="reset-frame">
+            <form className="reset-form">
+               <div className="reset-cont">    
+                   <div className="reset-fundoo">
+                       <span className="f">F</span>
+                       <span className="u">u</span>
+                       <span className="n">n</span>
+                       <span className="d">d</span>
+                       <span className="o">o</span>
+                       <span className="u">o</span>
+                   </div >
+                   <div className="reset">
+                   <p>Reset-password</p>
+                   </div>
+                   <div className="textfield">   
                             <TextField id="outlined-basic" type="password" className="update-field" variant="outlined" name="password"
                             label="password" size="small"  margin="dense" onChange={updatePassword} />
                             <TextField id="outlined-basic"type="password" className="update-field" variant="outlined" name="confirmpassword"
@@ -55,11 +62,11 @@ export default  function ResetPassword () {
                             </div>
                     </div>
                     <div className="button">
-                        <Link to="/">Back</Link>
+                        {/* <Link to="/">Back</Link> */}
                         < Button variant="outlined" size="small" onClick={submit}>submit</Button>
                         
-                    </div>
-                </div>
-            </div>
+                   </div>
+                   </form>
+                   </div>
             </>)
     }

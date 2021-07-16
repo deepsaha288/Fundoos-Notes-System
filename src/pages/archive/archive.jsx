@@ -1,5 +1,5 @@
 import React from 'react';
-import Displaynotes from '../displayNotes/Displaynotes';
+import Displaynotes from '../../components/displayNotes/Displaynotes';
 
 
 class Archive extends React.Component{

@@ -64,7 +64,7 @@ class Icons extends Component {
           }
         }
         
-    fileChangedHandler = (event) => {
+    fileRef = (event) => {
     event.preventDefault();
     console.log(event.target.files[0]);
     this.setState({ file: event.target.files[0] });
@@ -148,10 +148,9 @@ class Icons extends Component {
                             onChange={(e) =>{ this.getPhoto(e);}}
                             ref={(fileUpload) => (this.fileUpload = fileUpload)}
                             ></input>
-                            <img
-                            className="file"
+                            <img className="file"
                             onClick={() => this.fileUpload.click()}
-                            file={() => this.fileChangedHandler}
+                            file={() => this.fileRef}
                             src={image}
                             label="New note with image"
                             alt="note"

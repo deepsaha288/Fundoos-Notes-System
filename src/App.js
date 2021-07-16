@@ -1,11 +1,11 @@
 import './App.css';
-import Login from './components/login/Login';
+import Login from './pages/login/Login';
 import { BrowserRouter, Switch,Route} from "react-router-dom";
 import {ProtectedRoute} from '../src/services/auth/protectedRoutes';
-import Registration from './components/registration/Registration';
+import Registration from './pages/registration/Registration';
 import Dashboard from './components/dashboard/Dashboard';
-import ForgetPassword from '../src/components/ForgetPassword/ForgetPassword';
-import ResetPassword from './components/resetpassword/ResetPassword';
+import ForgetPassword from './pages/ForgetPassword/ForgetPassword';
+import ResetPassword from './pages/resetpassword/ResetPassword';
 
 
 

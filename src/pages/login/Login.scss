@@ -51,22 +51,14 @@
 }
 
 @media screen and (width: 360px) {
-    .login-form{ 
-        height: 600px;
-        margin-top: 0px;
-    }
-    .login-frame{
-        height: 490px;
-        display: flex;
+  
+    .login{
         justify-content: center;
-        align-items: center;
-       
+        display: flex;
+        flex-direction: column;
+         margin-top:auto;
+         height: 100vh;
+    
     }
   }
 
-  @media screen and (width: 411px) {
-    .login-form{  
-        height: 735px;
-        margin-top: 0px;   
-    }
-  }
